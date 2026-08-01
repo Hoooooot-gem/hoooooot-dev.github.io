@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- ==================== 基础 Meta ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ==================== SEO 与社交分享 ==================== -->
+    <title>Hoooooot 与开发</title>
+    <meta name="description" content="Hoooooot 的开发者笔记与项目记录。关于开发、设计和创造的故事。">
+    <meta property="og:title" content="Hoooooot 与开发">
+    <meta property="og:description" content="Hoooooot 的开发者笔记与项目记录。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hoooooot-dev.github.io">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- ==================== 网站图标（Favicon） ==================== -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    
+    <!-- ==================== 引用 CSS 文件 ==================== -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+
+<!-- ==================== 固定顶部导航栏 ==================== -->
+<header class="navbar" role="banner">
+    <div class="nav-container">
+        <!-- 左侧 Logo（已改为可点击跳转的链接） -->
+        <a href="https://hoooooot-gem.github.io" class="logo" aria-label="返回首页">
+            <img src="/images/favicon.svg" alt="Hoooooot" width="28" height="28">
+        </a>
+        <nav class="nav-menu" role="navigation" aria-label="主导航">
+            <ul class="nav-list">
+                <li><a href="/#vision">视觉</a></li>
+                <li><a href="/#web">网站</a></li>
+                <li><a href="/#software">软件</a></li>
+                <li><a href="/#contact">联系</a></li>
+            </ul>
+        </nav>
+        
+        <button class="hamburger" aria-label="切换菜单" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+</header>
+
+<!-- ==================== 页面主内容区 ==================== -->
+<main>
+    <!-- 1. Hero 首页区域 -->
+    <section id="hero" class="section hero" aria-label="首页">
+        <div class="hero-bg-image">
+            <video 
+                src="/images/hero-bg.mp4" 
+                poster="/images/hero-bg.webp" 
+                preload="metadata" 
+                autoplay 
+                muted 
+                loop 
+                playsinline>
+                <img src="/images/hero-bg.webp" alt="Hoooooot 背景图" loading="lazy">
+            </video>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Hoooooot 与开发</h1>
+            <!-- 你可以随时在下面加一句简短的副标题 -->
+        </div>
+    </section>
+
+    <!-- 2. 起步/入口区域 -->
+    <section id="start" class="section start" aria-label="开发起点">
+        <div class="container">
+            <h2 class="section-title">踏上开发之旅</h2>
+            <div class="start-content">
+                <div class="start-text">
+                    <p>记录技术探索、项目构建与设计思考。进入维基查看我的完整开发笔记。</p>
+                    <p class="start-sub">内容托管于 Miraheze 维基。</p>
+                </div>
+                <a href="https://hooooootdev.miraheze.org" target="_blank" rel="noopener noreferrer" class="start-button" aria-label="进入开发维基">
+                    进入开发维基 <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Projects 项目区域 -->
+    <section id="projects" class="section projects" aria-label="项目列表">
+        <div class="container">
+            <h2 class="section-title">项目</h2>
+            <!-- 这里可以复用你主页 Gallery 的跑马灯，或者写成卡片列表 -->
+            <div class="project-grid">
+                <div class="project-item">
+                    <div class="project-icon">⌨</div>
+                    <h3>中文打字练习</h3>
+                    <p>极简风格的在线中文打字工具。</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">📡</div>
+                    <h3>连接测试</h3>
+                    <p>检测服务器与客户端的网络质量。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ==================== 7. Footer 页脚区域 ==================== -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p>&copy; Hoooooot 2026</p>
+        <div id="footer-tagline"><sub>Hoooooot's 数据库可能存储在美国加利福尼亚州、德国法兰克福、日本东京等地区的服务器上，并根据当地法律提供的保护进行维护。您所在国家或司法管辖区的法律可能不保护或不允许相同类型的言论或分发。Hoooooot's 不鼓励违反任何法律，并且不对任何违反此类法律的行为负责。</sub></div>
+    </div>
+</footer>
+
+<!-- ==================== 引用 JS 文件 ==================== -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
