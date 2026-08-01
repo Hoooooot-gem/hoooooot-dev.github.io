@@ -115,7 +115,7 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 /* ==================== 6. Hero 首屏区域 ==================== */
 #hero {
   position: relative;
-  height: auto;                 /* 改为 auto，高度由内部图片自动撑开，不再强行填满屏幕 */
+  height: auto;                 /* 让容器自动适应内部图片的高度 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,12 +127,9 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 }
 
 .hero-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;           /* 改为 relative，回到文档流，参与撑开高度 */
   width: 100%;
-  height: 100%;                  /* 继承父级的高度（也就是图片本身的高度） */
-  z-index: -1;
+  height: auto;                 /* 高度自动由内部的 img 撑开 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,6 +145,7 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 
 .hero-content { position: relative; z-index: 1; max-width: 100%; }
 .hero-title { font-size: 1.8rem; font-weight: var(--font-weight-bold); color: #F5F5F7; letter-spacing: 0.02em; }
+
 /* ==================== 7. 入口 Start 区域 ==================== */
 .start .start-content { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; max-width: 800px; }
 .start .start-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 16px; color: var(--text-primary); }
