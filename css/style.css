@@ -1,0 +1,213 @@
+/* ============================================================
+   css/style.css
+   Apple 极简主义 / 瑞士排版 / 杂志感设计 — 强制深色版
+   ============================================================ */
+
+/* ==================== 0. 自定义网页字体（@font-face） ==================== */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/fonts/Inter-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==================== 1. CSS 变量 — 强制深色模式 ==================== */
+:root {
+  --bg-color: #000000;            /* 纯黑背景 */
+  --text-primary: #F5F5F7;        /* 主要文字：苹果浅灰白 */
+  --text-secondary: #AAAAAA;      /* 辅助文字：浅灰 */
+  --border-color: #333333;        /* 分割线：深灰 */
+  --nav-bg: rgba(0, 0, 0, 0.5);
+
+  --nav-height: 42px;
+  --max-width: 1200px;
+  --spacing-side: 80px;
+  
+  --font-family: 'CustomFont', -apple-system, 'SF Pro Display', 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-regular: 400;
+
+  --transition-theme: 0.3s ease;
+  --transition-reveal: 0.6s ease-out;
+}
+
+/* ==================== 2. 全局重置与基础样式 ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-theme), color var(--transition-theme);
+}
+
+a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+a:hover { opacity: 0.6; }
+ul { list-style: none; }
+
+/* ==================== 3. 排版系统 ==================== */
+h1, h2, h3, h4 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+h2.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 48px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-height: 1.6; }
+
+/* ==================== 4. 固定顶部导航栏 ==================== */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
+  background: transparent !important;
+  border-bottom: none !important;
+  z-index: 1000;
+  transition: border-bottom 0.3s ease;
+}
+.navbar::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none; opacity: 0; background: transparent;
+  transition: opacity 0.4s ease;
+}
+.navbar.scrolled {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.navbar.scrolled::before {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.navbar::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  pointer-events: none; z-index: -1;
+}
+.nav-container {
+  max-width: var(--max-width); height: 100%; margin: 0 auto; padding: 0 var(--spacing-side);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; justify-content: center; height: 100%; }
+.logo img { display: block; width: 20px; height: 20px; }
+.nav-menu { display: flex; align-items: center; gap: 32px; }
+.nav-list { display: flex; gap: 24px; }
+.nav-list a { font-size: 0.8rem; position: relative; color: #F5F5F7; transition: color 0.3s ease; }
+.navbar.scrolled .nav-list a { color: #F5F5F7; }
+.nav-list a.active { font-weight: var(--font-weight-bold); }
+
+/* 汉堡菜单 */
+.hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger .bar { width: 20px; height: 2px; background-color: #F5F5F7; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; }
+.navbar.scrolled .hamburger .bar { background-color: #F5F5F7; }
+
+/* ==================== 5. 页面主体区域 ==================== */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-side); }
+.section { padding: 120px 0; }
+.section-title { font-size: 2.5rem; margin-bottom: 48px; letter-spacing: -0.02em; }
+
+/* ==================== 6. Hero 首屏区域 ==================== */
+#hero {
+  position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 0 var(--spacing-side); background-color: var(--bg-color);
+  transition: background var(--transition-theme); overflow: hidden;
+}
+.hero-bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.hero-bg-image video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-content { position: relative; z-index: 1; max-width: 100%; }
+.hero-title { font-size: 1.8rem; font-weight: var(--font-weight-bold); color: #F5F5F7; letter-spacing: 0.02em; }
+
+/* ==================== 7. 入口 Start 区域 ==================== */
+.start .start-content { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; max-width: 800px; }
+.start .start-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 16px; color: var(--text-primary); }
+.start .start-text .start-sub { color: var(--text-secondary); margin-bottom: 0; }
+.start-button {
+    display: inline-flex; align-items: center; padding: 14px 32px;
+    border: 1px solid var(--text-primary); border-radius: 999px; background: transparent;
+    font-size: 1rem; font-weight: var(--font-weight-bold); color: var(--text-primary);
+    text-decoration: none; transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.start-button .arrow { margin-left: 8px; transition: transform 0.2s ease; }
+.start-button:hover { background: var(--text-primary); color: var(--bg-color); transform: translateY(-2px); }
+.start-button:hover .arrow { transform: translateX(4px); }
+
+@media screen and (max-width: 767px) {
+    .start .start-content { max-width: 100%; }
+    .start-button { width: 100%; justify-content: center; }
+}
+
+/* ==================== 8. Projects 项目区域 ==================== */
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.project-item { display: flex; flex-direction: column; gap: 12px; }
+.project-icon { font-size: 2.4rem; margin-bottom: 4px; }
+.project-item h3 { font-size: 1.2rem; }
+.project-item p { font-size: 0.95rem; }
+
+@media (max-width: 767px) {
+    .project-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ==================== 9. About 关于区域 ==================== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.about-text p { font-size: 1.1rem; line-height: 1.8; }
+.about-tags { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; }
+.tag {
+    display: inline-block; padding: 8px 20px; border: 1px solid var(--text-primary);
+    border-radius: 999px; background: transparent; font-size: 0.9rem; color: var(--text-primary);
+    transition: background 0.2s, color 0.2s;
+}
+@media (max-width: 767px) {
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ==================== 10. Contact 联系与 Footer 区域 ==================== */
+.contact-info { display: flex; flex-direction: column; gap: 12px; }
+.contact-info a { text-decoration: underline; text-underline-offset: 4px; }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--border-color); text-align: left; font-size: 0.9rem; color: var(--text-secondary); }
+.footer .container > * { display: block; margin-bottom: 8px; }
+.footer .container a { display: inline-block; margin-right: 4px; text-decoration: none; }
+#footer-tagline { margin-top: 12px; max-width: 600px; font-size: 0.75rem; line-height: 1.6; }
+
+/* ==================== 11. 视口滚动出现动画 ==================== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity var(--transition-reveal), transform var(--transition-reveal); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ==================== 12. 响应式设计 ==================== */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  :root { --spacing-side: 60px; }
+  .section { padding: 100px 0; }
+}
+@media screen and (max-width: 767px) {
+  :root { --spacing-side: 24px; }
+  .section { padding: 80px 0; }
+  .section-title { font-size: 2rem; margin-bottom: 32px; }
+  .hamburger { display: flex; }
+  .nav-menu {
+    position: fixed; top: var(--nav-height); left: 0; width: 100%; height: calc(100vh - var(--nav-height));
+    background-color: #000000; flex-direction: column; justify-content: center; gap: 32px;
+    transform: translateX(100%); transition: transform 0.3s ease-out, background var(--transition-theme);
+  }
+  .nav-menu.active { transform: translateX(0); }
+  .nav-list { display: flex !important; flex-direction: column; align-items: center; gap: 24px; font-size: 1.2rem; color: #F5F5F7; }
+  .nav-list a { color: #F5F5F7 !important; }
+  .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active .bar:nth-child(2) { opacity: 0; }
+  .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .project-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+}
