@@ -73,31 +73,25 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 
 /* ==================== 4. 固定顶部导航栏 ==================== */
 .navbar {
-  position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
-  background: transparent !important;
-  border-bottom: none !important;
-  z-index: 1000;
-  transition: border-bottom 0.3s ease;
-}
-.navbar::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none; opacity: 0; background: transparent;
-  transition: opacity 0.4s ease;
-}
-.navbar.scrolled {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-.navbar.scrolled::before {
-  opacity: 1;
-  background: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background: rgba(0, 0, 0, 0.85); /* 固定的深色毛玻璃 */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; /* 固定的底部细边框 */
+  z-index: 1000;
 }
+
+/* 导航栏顶部高光（保持不变） */
 .navbar::after {
   content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
   pointer-events: none; z-index: -1;
 }
+
 .nav-container {
   max-width: var(--max-width); height: 100%; margin: 0 auto; padding: 0 var(--spacing-side);
   display: flex; align-items: center; justify-content: space-between;
@@ -107,13 +101,11 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 .nav-menu { display: flex; align-items: center; gap: 32px; }
 .nav-list { display: flex; gap: 24px; }
 .nav-list a { font-size: 0.8rem; position: relative; color: #F5F5F7; transition: color 0.3s ease; }
-.navbar.scrolled .nav-list a { color: #F5F5F7; }
 .nav-list a.active { font-weight: var(--font-weight-bold); }
 
 /* 汉堡菜单 */
 .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
-.hamburger .bar { width: 20px; height: 2px; background-color: #F5F5F7; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; }
-.navbar.scrolled .hamburger .bar { background-color: #F5F5F7; }
+.hamburger .bar { width: 20px; height: 2px; background-color: #F5F5F7; transition: transform 0.3s ease, opacity 0.3s ease; }
 
 /* ==================== 5. 页面主体区域 ==================== */
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-side); }
@@ -122,32 +114,42 @@ p { font-weight: var(--font-weight-regular); color: var(--text-secondary); line-
 
 /* ==================== 6. Hero 首屏区域 ==================== */
 #hero {
-  position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 0 var(--spacing-side); background-color: var(--bg-color);
-  transition: background var(--transition-theme); overflow: hidden;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--spacing-side);
+  background-color: var(--bg-color);
+  transition: background var(--transition-theme);
+  overflow: hidden;
 }
-/* 【修改这里】：只让图片宽度 100% 铺满屏幕，高度自适应 */
-.hero-bg-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+
+.hero-bg-image {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/* 【新增】：针对图片的等比例铺满设置 */
-.hero-bg-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 核心：保持比例，填满屏幕无拉伸 */
-  display: block;
+  z-index: -1;
+  /* 【重点】使用 Flex 让图片完美居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero-bg-image video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 【新逻辑】宽度100%铺满左右，高度自适应，禁止压缩 */
+.hero-bg-image img {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;  /* 防止 flex 布局把它挤压变形 */
+  display: block;
+  object-fit: initial; /* 严格原图比例显示 */
+}
+
 .hero-content { position: relative; z-index: 1; max-width: 100%; }
 .hero-title { font-size: 1.8rem; font-weight: var(--font-weight-bold); color: #F5F5F7; letter-spacing: 0.02em; }
-
 /* ==================== 7. 入口 Start 区域 ==================== */
 .start .start-content { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; max-width: 800px; }
 .start .start-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 16px; color: var(--text-primary); }
