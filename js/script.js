@@ -68,16 +68,4 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.forEach(link => link.classList.remove('active'));
         }
     });
-
-    /* ==================== 额外：强制唤醒 Hero 视频 ==================== */
-    const heroVideo = document.querySelector('.hero-bg-image video');
-    if (heroVideo) {
-        heroVideo.play().catch(() => {
-            const wakeVideo = () => {
-                heroVideo.play().catch(() => {});
-                document.removeEventListener('click', wakeVideo);
-            };
-            document.addEventListener('click', wakeVideo);
-        });
-    }
 });
